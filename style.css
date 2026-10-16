@@ -1,0 +1,278 @@
+/* ===== VARIABLES: change colors in one place ===== */
+:root {
+  --bg: #0f172a;        /* dark navy background */
+  --bg-card: #1e293b;   /* slightly lighter for cards */
+  --text: #e2e8f0;      /* light text */
+  --muted: #94a3b8;     /* grey text */
+  --accent: #d4a24c;    /* gold accent (oud wood) */
+}
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* padding doesn't increase element width */
+}
+
+html {
+  scroll-behavior: smooth; /* smooth scroll when clicking nav links */
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ===== NAVBAR (Flexbox) ===== */
+.site-header {
+  position: sticky;
+  top: 1rem;               /* floats 1rem below the top */
+  z-index: 10;
+  padding: 0 1rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0.6rem 0.8rem 0.6rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(212, 162, 76, 0.3); /* thin gold edge */
+  border-radius: 50px;                         /* capsule shape */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-links a:hover {
+  background: rgba(212, 162, 76, 0.15); /* transparent gold */
+  color: var(--accent);
+}
+
+.nav-links a.nav-cta {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: bold;
+}
+
+.nav-links a.nav-cta:hover {
+  background: transparent;
+  color: var(--accent);
+  box-shadow: inset 0 0 0 2px var(--accent); /* gold outline */
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-small {
+  color: var(--accent);
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+}
+
+.hero-title {
+  color: var(--muted);
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  border: 2px solid var(--accent);
+  transition: transform 0.3s, background 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-3px); /* lifts slightly on hover */
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ===== SECTIONS (shared) ===== */
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--accent);
+  padding-left: 0.75rem;
+}
+
+/* ===== ABOUT (Flexbox) ===== */
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.about-img {
+  margin-bottom: 10px;
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;        /* stops Flexbox from squeezing it into a rectangle */
+  object-fit: cover;     /* fills the square without stretching */
+  border: 5px solid var(--accent);  /* 5px gold border */
+  border-radius: 8px; 
+}
+
+/* ===== SKILLS (Grid) ===== */
+.skills-grid {
+  display: grid;
+  /* as many 150px+ columns as fit; wraps automatically */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.skill {
+  background: var(--bg-card);
+  padding: 1rem;
+  text-align: center;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.skill:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ===== PROJECTS (Grid) ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: 8px;
+  overflow: hidden; /* keeps image inside rounded corners */
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #334155; /* grey box if image is missing */
+}
+
+/* the link around each image */
+.card a {
+  display: block;   /* removes the small gap under the image */
+  cursor: zoom-in;  /* magnifying-glass cursor shows it can be opened */
+  text-decoration: none;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-body h3 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.card-body p {
+  color: var(--muted);
+}
+
+/* ===== CONTACT ===== */
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--muted);
+  border-top: 1px solid var(--bg-card);
+}
+
+/* ===== RESPONSIVE: screens 700px or narrower ===== */
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.75rem;
+    border-radius: 20px;
+  }
+
+  .nav-links {
+  gap: 1rem;
+  flex-wrap: wrap;          /* links move to a second line if they don't fit */
+  justify-content: center;
+}
+
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .about-content {
+    flex-direction: column; /* image above text */
+    text-align: center;
+  }
+}
