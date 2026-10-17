@@ -21,7 +21,6 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <button class="menu-btn" id="menuBtn">☰ Menu</button>
   </header>
 
   <main>
@@ -131,8 +130,8 @@
     <article class="card">
       <img src="images/Italy.png" alt="">
       <div class="card-body">
-        <h3>Music in Italy</h3>
-        <p>been to Italy as a member of "Jilan" band to play music under the name "Music for Peace Festeval", as a Buzuq player</p>
+        <h3>music in Italy</h3>
+        <p>been to Italy with as a member of "Jilan" band to play music under the name "Music for Peace Festeval", as a Buzuq player</p>
       </div>
     </article>
 
@@ -164,24 +163,6 @@
   <footer class="site-footer">
     <p>&copy; 2026 Basil. Built with HTML &amp; CSS.</p>
   </footer>
-<script>
-  const header = document.querySelector('.site-header');
-  const btn = document.getElementById('menuBtn');
-
-  // after scrolling down 300px → show the button; back near the top → normal menu
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) header.classList.add('scrolled');
-    if (window.scrollY < 100) header.classList.remove('scrolled', 'open');
-  });
-
-  // tap the button → open/close the menu
-  btn.addEventListener('click', () => header.classList.toggle('open'));
-
-  // tap a link → close the menu
-  document.querySelectorAll('.nav-links a').forEach(link =>
-    link.addEventListener('click', () => header.classList.remove('open'))
-  );
-</script>
 
 </body>
 </html>
