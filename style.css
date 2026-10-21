@@ -539,5 +539,15 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 2rem 0.75rem;
   }
+
+    /* button text comes from CSS so it can change */
+    .menu-btn::before {
+      content: "☰ Menu";
+    }
+  
+    /* when the checkbox is ticked (menu open), show "Close" instead */
+    .menu-toggle:checked + .menu-btn::before {
+      content: "✕ Close";
+    }
 }
 
