@@ -1,0 +1,543 @@
+/* =========================================================
+   BASIL — PORTFOLIO
+   Theme: warm black + cream text + one gold accent
+   ========================================================= */
+
+/* ===== VARIABLES: all colors in one place ===== */
+:root {
+  --ink: #0e0d0b;                       /* page background (warm black) */
+  --surface: #17150f;                   /* cards, form fields */
+  --cream: #efe7d6;                     /* main text */
+  --muted: #a69d8b;                     /* secondary text */
+  --gold: #c9a35a;                      /* the only accent color */
+  --ivory: #f4efe4;                     /* light tiles behind icons */
+  --line: rgba(201, 163, 90, 0.18);     /* thin gold hairlines */
+
+  --font-title: "Playfair Display", Georgia, serif;
+  --font-text: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;   /* padding doesn't increase element width */
+}
+
+html {
+  scroll-behavior: smooth;  /* smooth scroll when clicking menu links */
+  scroll-padding-top: 6rem; /* section titles don't hide under the navbar */
+}
+
+body {
+  font-family: var(--font-text);
+  background: var(--ink);
+  color: var(--cream);
+  line-height: 1.7;
+}
+
+/* highlighted text uses the theme colors */
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* ===== NAVBAR (Flexbox, floating glass capsule) ===== */
+.site-header {
+  position: fixed;          /* stays on screen while scrolling */
+  top: 1rem;
+  left: 0;
+  right: 0;
+  padding: 0 1rem;
+  z-index: 10;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0.5rem 0.75rem 0.5rem 1.25rem;
+  background: rgba(14, 13, 11, 0.6);    /* see-through warm black */
+  backdrop-filter: blur(12px);          /* blurs what's behind it (glass effect) */
+  -webkit-backdrop-filter: blur(12px);  /* same, for Safari */
+  border: 1px solid var(--line);
+  border-radius: 50px;                  /* capsule shape */
+}
+
+.logo img {
+  height: 46px;
+  width: auto;              /* keeps the logo's proportions */
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--cream);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: color 0.3s, background 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+  background: rgba(201, 163, 90, 0.1);
+}
+
+/* checkbox + "Menu" button are only for phones (see @media at the end) */
+.menu-toggle,
+.menu-btn {
+  display: none;
+}
+
+/* ===== HERO (Flexbox: text left, photo right, instruments in the middle) ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 7rem max(1.5rem, calc((100% - 1180px) / 2)) 4rem;
+  /* two dark layers on top of the photo:
+     1) left-to-right: dark behind the text, clear in the middle (instruments), soft on the right
+     2) top-to-bottom: fades into the page color at the bottom */
+  background:
+    linear-gradient(to right,
+      rgba(14, 13, 11, 0.92) 0%,
+      rgba(14, 13, 11, 0.7) 30%,
+      rgba(14, 13, 11, 0.15) 50%,
+      rgba(14, 13, 11, 0.45) 70%,
+      rgba(14, 13, 11, 0.75) 100%),
+    linear-gradient(to bottom,
+      transparent 70%,
+      var(--ink) 100%),
+    url("images/studio.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-text {
+  max-width: 460px;
+}
+
+.hero-small {
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: var(--font-title);
+  font-size: 3.6rem;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hero-title {
+  color: var(--cream);
+  font-size: 1.1rem;
+  opacity: 0.85;
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold);   /* small gold bar beside the subtitle */
+  margin-bottom: 2.25rem;
+}
+
+/* photo in an arch frame (round top, straight bottom) */
+.hero-photo {
+  position: relative;
+  z-index: 0;        /* lets the second arch (z-index: -1) sit behind the photo, not behind the page */
+  flex-shrink: 0;
+}
+
+.hero-photo img {
+  display: block;
+  width: 250px;
+  height: 330px;
+  object-fit: cover;                 /* crops the photo, never stretches it */
+  object-position: center 15%;       /* keeps the face in view */
+  border-radius: 125px 125px 8px 8px; /* top corners = half the width → arch */
+  border: 2px solid var(--gold);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
+}
+
+/* thin second arch, offset behind the photo */
+.hero-photo::before {
+  content: "";
+  position: absolute;
+  inset: -14px 14px 14px -14px;     /* shifted up and to the left */
+  border: 1px solid var(--gold);
+  border-radius: 139px 139px 10px 10px;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* small gold label overlapping the bottom of the photo */
+.hero-photo figcaption {
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+  transform: translateX(-50%);       /* centers the label */
+  white-space: nowrap;
+  padding: 0.4rem 1.1rem;
+  background: var(--ink);
+  border: 1px solid var(--gold);
+  border-radius: 30px;
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.75rem;
+  background: var(--gold);
+  color: var(--ink);
+  border: 1px solid var(--gold);
+  border-radius: 40px;
+  font-family: var(--font-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(201, 163, 90, 0.25);  /* soft gold glow */
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+}
+
+.btn-outline:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* ===== SECTIONS (shared) ===== */
+.section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+}
+
+.section h2 {
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+}
+
+/* short gold line under every section title */
+.section h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  margin-top: 0.9rem;
+}
+
+/* ===== ABOUT ===== */
+.about-content p {
+  max-width: 760px;
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--cream);
+}
+
+/* ===== SKILLS (Grid) ===== */
+.skills-grid {
+  display: grid;
+  /* as many 150px+ columns as fit; wraps by itself */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2.5rem 1rem;
+  list-style: none;
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;   /* icon on top, text below */
+  align-items: center;
+  gap: 0.9rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--cream);
+  transition: color 0.3s, transform 0.3s;
+}
+
+/* every icon sits in an ivory circle, so dark and colorful icons all look good */
+.skill img {
+  width: 76px;
+  height: 76px;
+  padding: 17px;
+  object-fit: contain;      /* shows the whole icon, never crops it */
+  background: var(--ivory);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--line), 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 0.3s;
+}
+
+.skill:hover {
+  color: var(--gold);
+  transform: translateY(-5px);
+}
+
+.skill:hover img {
+  box-shadow: 0 0 0 2px var(--gold), 0 10px 25px rgba(201, 163, 90, 0.25);
+}
+
+/* ===== CARDS: Projects + Music (Grid + Flexbox) ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;   /* stack the card's contents vertically */
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;         /* keeps the image inside the rounded corners */
+  transition: transform 0.35s, border-color 0.35s, box-shadow 0.35s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.card-body {
+  flex-grow: 1;             /* text stretches so images line up at the bottom */
+  padding: 1.6rem 1.6rem 1.4rem;
+}
+
+.card-body h3 {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+.card-body p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* image goes under the text (order changes the visual order only) */
+.card > img {
+  order: 2;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;              /* photos fill the space */
+  object-position: center 35%;    /* keeps faces in view */
+}
+
+/* icons and logos: whole image visible, no background, blends into the card */
+.card > img.card-icon,
+.card > img.card-logo {
+  object-fit: contain;
+  background: transparent;
+  padding: 0.5rem 2rem 2rem;
+}
+
+/* black line icons → light lines */
+.card > img.icon-invert {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* dark single-color logo → white */
+.card > img.icon-light {
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+/* group photo in Italy: people are near the bottom of the picture */
+.card > img.photo-low {
+  object-position: center 78%;
+}
+
+/* ===== CONTACT ===== */
+.contact-form {
+  display: flex;
+  flex-direction: column;   /* fields stacked vertically */
+  gap: 0.4rem;
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+}
+
+.contact-form label {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  background: var(--surface);
+  color: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-family: inherit;     /* same font as the rest of the page */
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #6f685b;
+}
+
+/* gold outline when the visitor clicks into a field */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 163, 90, 0.18);
+}
+
+.contact-form .btn {
+  align-self: flex-start;   /* button doesn't stretch full width */
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;          /* buttons move to a new line if they don't fit */
+  gap: 0.9rem;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  border-top: 1px solid var(--line);
+}
+
+.about-content p + p {
+  margin-top: 1.25rem;   /* space between paragraphs */
+}
+
+/* ===== RESPONSIVE: screens 700px or narrower (phones) ===== */
+@media (max-width: 700px) {
+  /* gold "Menu" button in the top-right corner */
+  .menu-btn {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    z-index: 20;
+  }
+
+  /* the menu is hidden until the button is tapped */
+  .navbar {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 20px;
+    background: rgba(14, 13, 11, 0.92);
+  }
+
+  /* checkbox ticked (button tapped) → show the menu below the button */
+  .menu-toggle:checked ~ .navbar {
+    display: flex;
+    margin-top: 3.5rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;          /* links move to a new line if they don't fit */
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+
+  /* hero: text on top, photo below, both centered */
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 3rem;
+    padding: 6rem 1.25rem 4rem;
+    background:
+      linear-gradient(rgba(14, 13, 11, 0.7), rgba(14, 13, 11, 0.7)),
+      linear-gradient(to bottom, transparent 75%, var(--ink) 100%),
+      url("images/studio.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-title {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .hero-photo img {
+    width: 200px;
+    height: 260px;
+    border-radius: 100px 100px 8px 8px;
+  }
+
+  .hero-photo::before {
+    border-radius: 114px 114px 10px 10px;
+  }
+
+  .section {
+    padding: 4.5rem 1.25rem;
+  }
+
+  .section h2 {
+    font-size: 2rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 2rem 0.75rem;
+  }
+}
+
