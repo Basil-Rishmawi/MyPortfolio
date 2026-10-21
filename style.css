@@ -1,8 +1,8 @@
 /* ===== VARIABLES: change colors in one place ===== */
 :root {
-  --bg: #0f172a;        /* dark navy background */
+  --bg: #FAF9F6;        /* dark navy background */
   --bg-card: #1e293b;   /* slightly lighter for cards */
-  --text: #e2e8f0;      /* light text */
+  --text: #343231;      /* light text */
   --muted: #94a3b8;     /* grey text */
   --accent: #d4a24c;    /* gold accent (oud wood) */
 }
@@ -98,7 +98,7 @@ body {
   padding: 2rem;
   /* dark layer on top of the photo so the text stays readable */
   background:
-  linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.5)),
+  linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)),
   url("images/studio.png");
   background-size: cover;      /* fills the area, crops instead of stretching */
   background-position: center; /* keeps the middle of the photo visible */
@@ -161,6 +161,8 @@ body {
 
 /* ===== ABOUT (Flexbox) ===== */
 .about-content {
+  font-weight: bolder;
+  font-size: large;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -186,16 +188,30 @@ body {
 }
 
 .skill {
-  background: var(--bg-card);
+  background: none;           /* no box */
+  color: #e2e8f0;             /* black text */
   padding: 1rem;
   text-align: center;
-  border-radius: 6px;
-  transition: background 0.3s;
+  display: flex;
+  flex-direction: column;     /* icon on top, text below */
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: transform 0.3s, color 0.3s;
 }
 
 .skill:hover {
-  background: var(--accent);
-  color: var(--bg);
+  color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.skill img {
+  transition: transform 0.3s; 
+  width: 40px;
+}
+
+.skill:hover img {
+  transform: scale(1.15);   /* icon grows 15% */
 }
 
 /* ===== PROJECTS (Grid) ===== */
@@ -258,6 +274,81 @@ body {
   border-top: 1px solid var(--bg-card);
 }
 
+/* ===== CONTACT FORM ===== */
+.contact-form {
+  display: flex;
+  flex-direction: column;   /* fields stacked vertically */
+  gap: 0.4rem;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.contact-form label {
+  font-weight: bold;
+  color: #111111;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  background: #ffffff;
+  font-family: inherit;     /* same font as the rest of the page */
+  font-size: 1rem;
+}
+
+/* gold outline when the user clicks into a field */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(212, 162, 76, 0.25);
+}
+
+.contact-form .btn {
+  align-self: flex-start;   /* button doesn't stretch full width */
+  cursor: pointer;
+}
+
+.logo img {
+  height: 60px;      /* fits the navbar height */
+  width: auto;       /* keeps the logo's proportions */
+  display: block;    /* removes the small gap under images */
+}
+
+/* logo images in cards: no grey box, no cropping */
+.card img.card-logo {
+  background: transparent;
+  object-fit: contain;
+  padding: 1.5rem;
+  filter: brightness(0) invert(1);  /* turns the logo pure white */
+}
+
+/* ===== IMAGE BELOW TEXT IN CARDS ===== */
+.card {
+  display: flex;
+  flex-direction: column;   /* stack the card's contents vertically */
+}
+
+.card-body {
+  flex-grow: 1;             /* text area stretches, pushing images to the bottom */
+}
+
+.card > a,
+.card > img {
+  order: 2;                 /* image (or its link) moves after the text */
+}
+
+/* icons in cards: whole icon visible, no grey box */
+.card img.card-icon {
+  background: transparent;
+  object-fit: contain;   /* shows the whole icon instead of cropping it */
+  padding: 1.5rem;
+}
+
 /* ===== RESPONSIVE: screens 700px or narrower ===== */
 @media (max-width: 700px) {
   .navbar {
@@ -281,4 +372,49 @@ body {
     flex-direction: column; /* image above text */
     text-align: center;
   }
+}
+
+/* ===== HERO ON DARK BACKGROUND ===== */
+
+/* 1. light text on the dark photo, with a soft shadow so it stands out */
+.hero h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.hero-title {
+  color: #e2e8f0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* logo is on the dark navy bar, so it must be light */
+.logo {
+  color: #ffffff;
+}
+
+/* 3. navbar floats over the hero instead of pushing it down */
+.site-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.hero {
+  min-height: 100vh;   /* fills the whole screen, under the navbar */
+  padding-top: 6rem;   /* keeps "Hello, I'm" below the navbar */
+}
+
+/* when clicking a menu link, stop the section title hiding under the navbar */
+html {
+  scroll-padding-top: 6rem;
+}
+
+/* skill boxes are dark navy, so their text must be light */
+.skill {
+  color: #111111;
+}
+
+.skill:hover {
+  color: var(--accent);
+  transform: translateY(-4px);
 }
