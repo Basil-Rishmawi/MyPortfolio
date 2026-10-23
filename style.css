@@ -1,32 +1,26 @@
-/* =========================================================
-   BASIL — PORTFOLIO
-   Theme: warm black + cream text + one gold accent
-   ========================================================= */
 
-/* ===== VARIABLES: all colors in one place ===== */
 :root {
-  --ink: #0e0d0b;                       /* page background (warm black) */
-  --surface: #17150f;                   /* cards, form fields */
-  --cream: #efe7d6;                     /* main text */
-  --muted: #a69d8b;                     /* secondary text */
-  --gold: #c9a35a;                      /* the only accent color */
-  --ivory: #f4efe4;                     /* light tiles behind icons */
-  --line: rgba(201, 163, 90, 0.18);     /* thin gold hairlines */
+  --ink: #0e0d0b;                      
+  --surface: #17150f;                  
+  --cream: #efe7d6;                     
+  --muted: #a69d8b;                     
+  --gold: #c9a35a;                     
+  --ivory: #f4efe4;                    
+  --line: rgba(201, 163, 90, 0.18);    
 
   --font-title: "Playfair Display", Georgia, serif;
   --font-text: "Inter", "Segoe UI", Arial, sans-serif;
 }
 
-/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;   /* padding doesn't increase element width */
+  box-sizing: border-box;   
 }
 
 html {
-  scroll-behavior: smooth;  /* smooth scroll when clicking menu links */
-  scroll-padding-top: 6rem; /* section titles don't hide under the navbar */
+  scroll-behavior: smooth;  
+  scroll-padding-top: 6rem; 
 }
 
 body {
@@ -36,15 +30,13 @@ body {
   line-height: 1.7;
 }
 
-/* highlighted text uses the theme colors */
 ::selection {
   background: var(--gold);
   color: var(--ink);
 }
 
-/* ===== NAVBAR (Flexbox, floating glass capsule) ===== */
 .site-header {
-  position: fixed;          /* stays on screen while scrolling */
+  position: fixed;         
   top: 1rem;
   left: 0;
   right: 0;
@@ -59,16 +51,16 @@ body {
   max-width: 960px;
   margin: 0 auto;
   padding: 0.5rem 0.75rem 0.5rem 1.25rem;
-  background: rgba(14, 13, 11, 0.6);    /* see-through warm black */
-  backdrop-filter: blur(12px);          /* blurs what's behind it (glass effect) */
-  -webkit-backdrop-filter: blur(12px);  /* same, for Safari */
+  background: rgba(14, 13, 11, 0.6);   
+  backdrop-filter: blur(12px);          
+  -webkit-backdrop-filter: blur(12px);  
   border: 1px solid var(--line);
-  border-radius: 50px;                  /* capsule shape */
+  border-radius: 50px;                 
 }
 
 .logo img {
   height: 46px;
-  width: auto;              /* keeps the logo's proportions */
+  width: auto;             
   display: block;
 }
 
@@ -95,13 +87,11 @@ body {
   background: rgba(201, 163, 90, 0.1);
 }
 
-/* checkbox + "Menu" button are only for phones (see @media at the end) */
 .menu-toggle,
 .menu-btn {
   display: none;
 }
 
-/* ===== HERO (Flexbox: text left, photo right, instruments in the middle) ===== */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -109,9 +99,7 @@ body {
   align-items: center;
   gap: 2rem;
   padding: 7rem max(1.5rem, calc((100% - 1180px) / 2)) 4rem;
-  /* two dark layers on top of the photo:
-     1) left-to-right: dark behind the text, clear in the middle (instruments), soft on the right
-     2) top-to-bottom: fades into the page color at the bottom */
+
   background:
     linear-gradient(to right,
       rgba(14, 13, 11, 0.92) 0%,
@@ -153,14 +141,13 @@ body {
   font-size: 1.1rem;
   opacity: 0.85;
   padding-left: 1rem;
-  border-left: 2px solid var(--gold);   /* small gold bar beside the subtitle */
+  border-left: 2px solid var(--gold);
   margin-bottom: 2.25rem;
 }
 
-/* photo in an arch frame (round top, straight bottom) */
 .hero-photo {
   position: relative;
-  z-index: 0;        /* lets the second arch (z-index: -1) sit behind the photo, not behind the page */
+  z-index: 0;       
   flex-shrink: 0;
 }
 
@@ -168,30 +155,28 @@ body {
   display: block;
   width: 250px;
   height: 330px;
-  object-fit: cover;                 /* crops the photo, never stretches it */
-  object-position: center 15%;       /* keeps the face in view */
-  border-radius: 125px 125px 8px 8px; /* top corners = half the width → arch */
+  object-fit: cover;                
+  object-position: center 15%;       
+  border-radius: 125px 125px 8px 8px; 
   border: 2px solid var(--gold);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
 }
 
-/* thin second arch, offset behind the photo */
 .hero-photo::before {
   content: "";
   position: absolute;
-  inset: -14px 14px 14px -14px;     /* shifted up and to the left */
+  inset: -14px 14px 14px -14px;    
   border: 1px solid var(--gold);
   border-radius: 139px 139px 10px 10px;
   opacity: 0.5;
   z-index: -1;
 }
 
-/* small gold label overlapping the bottom of the photo */
 .hero-photo figcaption {
   position: absolute;
   left: 50%;
   bottom: -16px;
-  transform: translateX(-50%);       /* centers the label */
+  transform: translateX(-50%);     
   white-space: nowrap;
   padding: 0.4rem 1.1rem;
   background: var(--ink);
@@ -203,7 +188,6 @@ body {
   text-transform: uppercase;
 }
 
-/* ===== BUTTONS ===== */
 .btn {
   display: inline-block;
   padding: 0.8rem 1.75rem;
@@ -223,7 +207,7 @@ body {
 
 .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(201, 163, 90, 0.25);  /* soft gold glow */
+  box-shadow: 0 10px 25px rgba(201, 163, 90, 0.25); 
 }
 
 .btn-outline {
@@ -236,7 +220,6 @@ body {
   color: var(--ink);
 }
 
-/* ===== SECTIONS (shared) ===== */
 .section {
   max-width: 1080px;
   margin: 0 auto;
@@ -250,7 +233,6 @@ body {
   margin-bottom: 3rem;
 }
 
-/* short gold line under every section title */
 .section h2::after {
   content: "";
   display: block;
@@ -260,7 +242,6 @@ body {
   margin-top: 0.9rem;
 }
 
-/* ===== ABOUT ===== */
 .about-content p {
   max-width: 760px;
   font-size: 1.15rem;
@@ -268,10 +249,8 @@ body {
   color: var(--cream);
 }
 
-/* ===== SKILLS (Grid) ===== */
 .skills-grid {
   display: grid;
-  /* as many 150px+ columns as fit; wraps by itself */
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 2.5rem 1rem;
   list-style: none;
@@ -279,7 +258,7 @@ body {
 
 .skill {
   display: flex;
-  flex-direction: column;   /* icon on top, text below */
+  flex-direction: column;   
   align-items: center;
   gap: 0.9rem;
   text-align: center;
@@ -288,12 +267,11 @@ body {
   transition: color 0.3s, transform 0.3s;
 }
 
-/* every icon sits in an ivory circle, so dark and colorful icons all look good */
 .skill img {
   width: 76px;
   height: 76px;
   padding: 17px;
-  object-fit: contain;      /* shows the whole icon, never crops it */
+  object-fit: contain;     
   background: var(--ivory);
   border-radius: 50%;
   box-shadow: 0 0 0 1px var(--line), 0 8px 20px rgba(0, 0, 0, 0.35);
@@ -309,7 +287,6 @@ body {
   box-shadow: 0 0 0 2px var(--gold), 0 10px 25px rgba(201, 163, 90, 0.25);
 }
 
-/* ===== CARDS: Projects + Music (Grid + Flexbox) ===== */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -318,11 +295,11 @@ body {
 
 .card {
   display: flex;
-  flex-direction: column;   /* stack the card's contents vertically */
+  flex-direction: column; 
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 14px;
-  overflow: hidden;         /* keeps the image inside the rounded corners */
+  overflow: hidden;         
   transition: transform 0.35s, border-color 0.35s, box-shadow 0.35s;
 }
 
@@ -333,7 +310,7 @@ body {
 }
 
 .card-body {
-  flex-grow: 1;             /* text stretches so images line up at the bottom */
+  flex-grow: 1;            
   padding: 1.6rem 1.6rem 1.4rem;
 }
 
@@ -350,16 +327,14 @@ body {
   font-size: 0.95rem;
 }
 
-/* image goes under the text (order changes the visual order only) */
 .card > img {
   order: 2;
   width: 100%;
   height: 220px;
-  object-fit: cover;              /* photos fill the space */
-  object-position: center 35%;    /* keeps faces in view */
+  object-fit: cover;              
+  object-position: center 35%;    
 }
 
-/* icons and logos: whole image visible, no background, blends into the card */
 .card > img.card-icon,
 .card > img.card-logo {
   object-fit: contain;
@@ -367,26 +342,22 @@ body {
   padding: 0.5rem 2rem 2rem;
 }
 
-/* black line icons → light lines */
 .card > img.icon-invert {
   filter: invert(1) hue-rotate(180deg);
 }
 
-/* dark single-color logo → white */
 .card > img.icon-light {
   filter: brightness(0) invert(1);
   opacity: 0.85;
 }
 
-/* group photo in Italy: people are near the bottom of the picture */
 .card > img.photo-low {
   object-position: center 78%;
 }
 
-/* ===== CONTACT ===== */
 .contact-form {
   display: flex;
-  flex-direction: column;   /* fields stacked vertically */
+  flex-direction: column;  
   gap: 0.4rem;
   max-width: 640px;
   margin-bottom: 2.5rem;
@@ -408,7 +379,7 @@ body {
   color: var(--cream);
   border: 1px solid var(--line);
   border-radius: 10px;
-  font-family: inherit;     /* same font as the rest of the page */
+  font-family: inherit;    
   font-size: 1rem;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -418,7 +389,6 @@ body {
   color: #6f685b;
 }
 
-/* gold outline when the visitor clicks into a field */
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
@@ -427,16 +397,15 @@ body {
 }
 
 .contact-form .btn {
-  align-self: flex-start;   /* button doesn't stretch full width */
+  align-self: flex-start;  
 }
 
 .contact-links {
   display: flex;
-  flex-wrap: wrap;          /* buttons move to a new line if they don't fit */
+  flex-wrap: wrap;       
   gap: 0.9rem;
 }
 
-/* ===== FOOTER ===== */
 .site-footer {
   text-align: center;
   padding: 2.5rem 1.5rem;
@@ -447,12 +416,10 @@ body {
 }
 
 .about-content p + p {
-  margin-top: 1.25rem;   /* space between paragraphs */
+  margin-top: 1.25rem;   
 }
 
-/* ===== RESPONSIVE: screens 700px or narrower (phones) ===== */
 @media (max-width: 700px) {
-  /* gold "Menu" button in the top-right corner */
   .menu-btn {
     display: block;
     position: fixed;
@@ -471,7 +438,6 @@ body {
     z-index: 20;
   }
 
-  /* the menu is hidden until the button is tapped */
   .navbar {
     display: none;
     flex-direction: column;
@@ -481,14 +447,13 @@ body {
     background: rgba(14, 13, 11, 0.92);
   }
 
-  /* checkbox ticked (button tapped) → show the menu below the button */
   .menu-toggle:checked ~ .navbar {
     display: flex;
     margin-top: 3.5rem;
   }
 
   .nav-links {
-    flex-wrap: wrap;          /* links move to a new line if they don't fit */
+    flex-wrap: wrap;         
     justify-content: center;
   }
 
@@ -496,7 +461,6 @@ body {
     font-size: 2.4rem;
   }
 
-  /* hero: text on top, photo below, both centered */
   .hero {
     flex-direction: column;
     justify-content: center;
@@ -540,12 +504,10 @@ body {
     gap: 2rem 0.75rem;
   }
 
-    /* button text comes from CSS so it can change */
     .menu-btn::before {
       content: "☰ Menu";
     }
   
-    /* when the checkbox is ticked (menu open), show "Close" instead */
     .menu-toggle:checked + .menu-btn::before {
       content: "✕ Close";
     }
